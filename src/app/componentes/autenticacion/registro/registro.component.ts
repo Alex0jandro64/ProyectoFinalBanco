@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Cuenta } from 'src/app/modelo/cuenta';
 import { Usuario } from 'src/app/modelo/usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { NotificacionesService } from 'src/app/servicios/notificaciones.service';
@@ -37,7 +38,9 @@ export class RegistroComponent {
     });
   }
 
+
   onSubmit() {
+    
     this.usuarioServicio
       .registrar(this.formularioRegistro.value)
       .then((response) => {
@@ -85,19 +88,32 @@ export class RegistroComponent {
       rol: 'ROLE_USER',
       fechaRegistro: new Date(),
     };
+  
+    // Creamos la cuenta bancaria
+    const cuentaBancaria: Cuenta = {
+      codigoIban: 'GENERAR_CÓDIGO_IBAN_AQUÍ', // Aquí debes generar el código IBAN de forma apropiada
+      saldoCuenta: 30, // Opcionalmente, podrías definir un saldo inicial
+      usuarioCuenta: usuario.email, // Asociamos la cuenta al usuario por su email
+    };
+  
+    // Insertamos el usuario en la base de datos
     this.baseDatosService
       .insertar('usuarios', usuario)
       .then(() => {
+        // Insertamos la cuenta bancaria en la base de datos
+        return this.baseDatosService.insertar('cuentas', cuentaBancaria);
+      })
+      .then(() => {
         if (this.tipoRegistro === 'admin') {
           this.notificacionesServicio.mostrarNotificacion(
-            'Registro completado con exito',
+            'Registro completado con éxito',
             'Cuenta creada, el usuario puede hacer uso de ella.',
             'success'
           );
           this.router.navigate(['/administracion/listado-usuarios']);
         } else {
           this.notificacionesServicio.mostrarNotificacion(
-            'Registro completado con exito',
+            'Registro completado con éxito',
             'Su cuenta ha sido creada, ahora puede iniciar sesión.',
             'success'
           );
@@ -107,5 +123,4 @@ export class RegistroComponent {
       .catch((error) => {
         console.log(error);
       });
-  }
-}
+  }}

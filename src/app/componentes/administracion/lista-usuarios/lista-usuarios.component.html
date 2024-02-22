@@ -1,0 +1,55 @@
+<div class="card bg-light cardPrincipal cardAdminUser">
+    <div class="card-header border-bottom border-3">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <h3 class="subtituloSecundario m-0">Administración de usuarios</h3>
+            <div class="col-md-6 text-end">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="busquedaUser" placeholder="Buscar por el email del usuario">
+                    <button class="btn buttonPrincipal" type="button" (click)="buscarUsuarios()">Buscar</button>
+                </div>
+            </div>                       
+        </div>
+    </div>
+    <div class="card-body">
+        <button (click)="navegarARegistro()" class="btn buttonPrincipal p-2 mb-3">
+            <i class="bi bi-person-add p-2 fs-5"> Registrar usuario</i>
+        </button>
+        <h5 class="card-title text-center text-danger" *ngIf="usuarios.length === 0">No hay usuarios registrados</h5>
+
+        <table class="table table-striped table-bordered" *ngIf="usuarios.length > 0">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="tableCustom">Nombre</th>
+                    <th class="tableCustom">Apellidos</th>
+                    <th class="tableCustom">Email</th>
+                    <th class="tableCustom">Teléfono</th>
+                    <th class="tableCustom">Fecha de registro</th>
+                    <th class="tableCustom">Rol</th>
+                    <th class="tableCustom">Edición</th>
+                    <th class="tableCustom">Eliminado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellidos }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.telefono }}</td>
+                    <td>{{ usuario.fechaRegistro | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+                    <td>{{ usuario.rol === 'ROLE_USER' ? 'USER' : 'ADMIN' }}</td>
+                    <td>
+                        <a class="btn buttonPrincipal" routerLink="/administracion/editar-usuario/{{ usuario.id }}">
+                            <i class="bi bi-pencil-square"> Editar</i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" *ngIf="usuario.id"
+                        (click)="eliminarUsuario(usuario.id, usuario.email)">
+                            <i class="bi bi-trash"> Eliminar</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

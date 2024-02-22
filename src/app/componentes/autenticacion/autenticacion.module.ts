@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { InicioComponent } from './inicio/inicio.component';
     LoginComponent,
     RegistroComponent,
     InicioComponent,
+    RecuperarPasswordComponent,
     
   ],
   imports: [

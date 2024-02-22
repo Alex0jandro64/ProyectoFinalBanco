@@ -5,6 +5,7 @@ import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
 
 const routes: Routes = [
   { path: '', component: AutenticacionComponent, children:[
@@ -13,6 +14,7 @@ const routes: Routes = [
       component: InicioComponent, 
       ...canActivate(()=> redirectUnauthorizedTo(['/autenticacion/login']))
     },
+    { path: 'recuperar-password', component: RecuperarPasswordComponent},
     { path: 'login', component: LoginComponent},
     { path: 'registrar', component: RegistroComponent },
   ]}

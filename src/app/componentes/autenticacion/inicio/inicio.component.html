@@ -4,7 +4,9 @@
         <h2>Cuenta</h2>
         <div class="user-info">
           <p>Nombre: {{ usuarioActual?.nombre}} {{ usuarioActual?.apellidos}}</p>
-          <p>Saldo: </p>
+          <p *ngIf="usuarioActual && usuarioActual.misCuentas && usuarioActual.misCuentas.length > 0">
+            Saldo: {{ usuarioActual.misCuentas[0].saldoCuenta }} €
+          </p>
         </div>
       </div>
     </div>
@@ -14,7 +16,7 @@
           <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <h5 class="card-title">Administrar Usuario</h5>
             <p class="card-text">Aquí puedes administrar la información del usuario.</p>
-            <a href="#" class="btn btn-primary">Ir a Administración</a>
+            <a routerLink="/administracion/listado-usuarios" class="btn btn-primary">Ir a Administración</a>
           </div>
         </div>
       </div>
