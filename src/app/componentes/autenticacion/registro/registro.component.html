@@ -1,0 +1,68 @@
+<div class="registro cardPrincipal">
+    <form class="custom-form" [formGroup]="formularioRegistro" (ngSubmit)="onSubmit()">
+     
+      <h2 class="text-center mb-5"><i class="bi bi-person-vcard-fill" style="color: #1f3c85;"> Registro nuevo usuario</i></h2>
+      <div class="mb-3">
+        <div class="mb-3">
+            <label for="nombre" class="form-label textoPrincipal">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              formControlName="nombre"
+              class="form-control"
+              placeholder="Introduzca su nombre"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="apellidos" class="form-label textoPrincipal">Apellidos</label>
+            <input
+              type="text"
+              id="apellidos"
+              name="apellidos"
+              formControlName="apellidos"
+              class="form-control"
+              placeholder="Introduzca sus apellidos"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label textoPrincipal">Teléfono</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              formControlName="telefono"
+              class="form-control"
+              placeholder="Introduzca su teléfono"
+              required
+            />
+          </div>
+      <label for="email" class="form-label textoPrincipal">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Introduzca su correo electrónico"
+          required           
+        />
+      </div>
+      <div class="mb-3">
+          <label for="password" class="form-label textoPrincipal">Contraseña</label>
+        <input
+           type="password"
+           id="password"
+           name="password"
+           formControlName="password"
+           class="form-control"
+           placeholder="Introduzca su contraseña"
+           required
+        />
+       </div>
+      
+      <button type="submit" value="Enviar" id="btnRegistro" class="btn btn-primary mt-5" [disabled]="!formularioRegistro.valid"><i class="bi bi-person-add fs-5" > Crear cuenta</i></button>
+    </form>
+  </div>

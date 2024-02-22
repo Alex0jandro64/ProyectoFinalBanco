@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark bg-gradient text-white w-100">
+    <div class="container-fluid ms-5">
+        <h3><a class="text-white" href="/">AlceBank</a></h3>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-3" id="navbarSupportedContent">
+            <ul class="navbar-nav me-5 ms-auto" >
+                <li class="nav-item me-2">
+                    <a class="nav-link text-white" routerLink="/autenticacion/inicio"><i class="bi bi-box-arrow-in-right fs-5">Inicio</i></a>
+                </li>
+                <li class="nav-item me-2">
+                    <a class="nav-link text-white" routerLink="/autenticacion/login"><i class="bi bi-box-arrow-in-right fs-5"> Administrar Usuarios</i></a>
+                </li>
+                <li class="nav-item me-2">
+                    <button type="button"  class=" text-white btn buttonPrincipal" (click)="onClick()"><i class="bi bi-box-arrow-in-left"> Cerrar sesión</i></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

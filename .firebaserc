@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "prueba-5fae3": {
+      "hosting": {
+        "ProyectoFinalBanco": [
+          "bancofinal"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "prueba-5fae3"
+  }
+}
