@@ -1,0 +1,37 @@
+<form class="custom-form cardPrincipal" [formGroup]="formEditarUsuario" (ngSubmit)="editarUsuario()">
+    <h2 class="text-center mb-3">
+      <i class="bi bi-person-fill-gear text-light">Editar usuario</i>
+    </h2>
+    <div class="mb-3">
+      <label for="email" class="form-label text-light">Correo Electrónico</label>
+      <input type="email" id="email" name="email" formControlName="email" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+      <label for="nombre" class="form-label text-light">Nombre</label>
+      <input type="text" id="nombre" name="nombre" formControlName="nombre" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="apellidos" class="form-label text-light">Apellidos</label>
+      <input type="text" id="apellidos" name="apellidos" formControlName="apellidos" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label for="telefono" class="form-label text-light">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" formControlName="telefono" class="form-control" required />
+    </div>
+    <div class="mb-3 mt-3">
+      <label for="rol" class="form-label text-light">Rol del usuario (Solamente se permite escalar
+        privilegios)</label>
+      <ng-container *ngIf="usuario?.rol === 'ROLE_USER'">
+        <select id="rol" name="rol" class="form-select" formControlName="rol" required>
+          <option value="ROLE_USER">Usuario</option>
+          <option value="ROLE_ADMIN">Administrador</option>
+        </select>
+      </ng-container>
+      <ng-container *ngIf="usuario?.rol === 'ROLE_ADMIN'">
+        <input type="text" name="rol" value="Administrador" class="form-control" readonly>
+      </ng-container>
+    </div>
+    <button type="submit" class="btn btn-primary mt-5">
+      <i class="bi bi-person-fill-gear fs-5"> Guardar cambios</i>
+    </button>
+  </form>
