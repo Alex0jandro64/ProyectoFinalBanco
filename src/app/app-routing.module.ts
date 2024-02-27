@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', component: BienvenidaComponent},
   { path: 'autenticacion', loadChildren: () => import('./componentes/autenticacion/autenticacion.module').then(m => m.AutenticacionModule) },
   { path: 'administracion', loadChildren: () => import('./componentes/administracion/administracion.module').then(m => m.AdministracionModule) },
-
+  { path: 'transaccion', loadChildren: () => import('./componentes/transaccion/transaccion.module').then(m => m.TransaccionModule) },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 

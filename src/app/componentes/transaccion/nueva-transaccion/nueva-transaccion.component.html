@@ -1,0 +1,42 @@
+<div class="registro cardPrincipal">
+    <form class="custom-form" [formGroup]="formularioTransaccion" (ngSubmit)="onSubmit()">
+     
+      <h2 class="text-center mb-5"><i class="bi bi-person-vcard-fill text-light" > Registro nueva Transaccion</i></h2>
+      <div class="mb-3">
+        <label for="codigoIbanRemitente" class="form-label text-light">Seleccionar cuenta:</label>
+        <select id="codigoIbanRemitente" name="codigoIbanRemitente" formControlName="codigoIbanRemitente" class="form-select" required>
+            <option value="" disabled selected>Seleccione una cuenta</option>
+            <option *ngFor="let cuenta of usuarioActual?.misCuentas" [value]="cuenta.codigoIban">{{ cuenta.codigoIban }}</option>
+        </select>
+    </div>
+      
+
+      <div class="mb-3">
+        <label for="cantidad" class="form-label text-light">Cantidad</label>
+        <input
+          type="number"
+          id="cantidad"
+          name="cantidad"
+          formControlName="cantidad"
+          class="form-control"
+          placeholder="Introduzca la cantidad a transferir"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="codigoIbanDestino" class="form-label text-light">Código IBAN de Destino</label>
+        <input
+          type="text"
+          id="codigoIbanDestino"
+          name="codigoIbanDestino"
+          formControlName="codigoIbanDestino"
+          class="form-control"
+          placeholder="Introduzca el código IBAN del destinatario"
+          required
+        />
+      </div>
+      
+      
+      <button type="submit" id="btnTransaccion" class="btn btn-primary mt-5" [disabled]="!formularioTransaccion.valid"><i class="bi bi-person-add fs-5" > Realizar Transacción</i></button>
+    </form>
+</div>

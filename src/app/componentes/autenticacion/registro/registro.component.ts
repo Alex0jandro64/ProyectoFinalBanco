@@ -6,7 +6,6 @@ import { Usuario } from 'src/app/modelo/usuario';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { NotificacionesService } from 'src/app/servicios/notificaciones.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -91,7 +90,7 @@ export class RegistroComponent {
   
     // Creamos la cuenta bancaria
     const cuentaBancaria: Cuenta = {
-      codigoIban: 'GENERAR_CÓDIGO_IBAN_AQUÍ', // Aquí debes generar el código IBAN de forma apropiada
+      codigoIban: this.generarIbanAleatorio(), // Aquí debes generar el código IBAN de forma apropiada
       saldoCuenta: 30, // Opcionalmente, podrías definir un saldo inicial
       usuarioCuenta: usuario.email, // Asociamos la cuenta al usuario por su email
     };
@@ -117,10 +116,28 @@ export class RegistroComponent {
             'Su cuenta ha sido creada, ahora puede iniciar sesión.',
             'success'
           );
-          this.router.navigate(['/autenticacion/login']);
+          this.router.navigate(['/autenticacion/inicio']);
         }
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+  generarIbanAleatorio(): string {
+    const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numeros = '0123456789';
+
+    let iban = 'ES'; // Código de país para España
+
+    // Generar el resto del IBAN con números y letras aleatorias
+    for (let i = 0; i < 22; i++) {
+      if (i < 4) {
+        iban += numeros.charAt(Math.floor(Math.random() * numeros.length));
+      } else {
+        iban += letras.charAt(Math.floor(Math.random() * letras.length));
+      }
+    }
+
+    return iban;
   }}
+  

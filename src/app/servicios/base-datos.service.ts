@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentData, Firestore, QuerySnapshot, addDoc, collection, collectionData, deleteDoc, doc, docData, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Cuenta } from '../modelo/cuenta';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseDatosService {
+
 
   constructor(private fbs: Firestore) {}
 
@@ -55,6 +57,12 @@ export class BaseDatosService {
     return collectionData(queryRef, { idField: 'id' }) as Observable<any[]>;
   }
 
+  obtenerPorFiltro1(coleccion: string, campo: string, valor: any) {
+    const collectionRef = collection(this.fbs, coleccion);
+    const queryRef = query(collectionRef, where(campo, '==', valor));
+    return collectionData(queryRef, { idField: 'id' });
+  }
+
   /**
    * Elimina un documento de una colección determinada
    * @param coleccion de la base de datos que se va a eliminar
@@ -77,4 +85,29 @@ export class BaseDatosService {
     return updateDoc(elementDocRef, documento);
   }
 
+  obtenerCuentaPorCodigoIban(codigoIban: string): Observable<Cuenta | null> {
+    const q = query(collection(this.fbs, 'cuentas'), where('codigoIban', '==', codigoIban));
+    return new Observable<Cuenta | null>((observer) => {
+      getDocs(q)
+        .then((querySnapshot: QuerySnapshot<DocumentData>) => {
+          if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+              observer.next(doc.data() as Cuenta);
+            });
+          } else {
+            observer.next(null); // Emitir null si no se encuentra ninguna cuenta
+          }
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  actualizarSaldoCuenta(codigoIban: string, nuevoSaldo: number): Promise<void> {
+    const cuentaRef = doc(this.fbs, 'cuentas', codigoIban);
+    return updateDoc(cuentaRef, { saldoCuenta: nuevoSaldo });
+  }
 }
+  

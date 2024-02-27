@@ -1,0 +1,32 @@
+<div class="card bg-light cardPrincipal cardAdminUser">
+    <div class="card-header border-bottom border-3">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <h3 class="subtituloSecundario m-0">Historial de Transacciones</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title text-center text-danger" *ngIf="transacciones.length === 0">No hay Transacciones registradas</h5>
+
+        <table class=" custom-table table table-striped table-bordered" *ngIf="transacciones.length > 0">
+            <thead class="thead-inverse">
+                <tr>
+                    <th class="tableCustom">Fecha Transaccion</th>
+                    <th class="tableCustom">Codigo Iban Remitente</th>
+                    <th class="tableCustom">Codigo Iban Destinatario</th>
+                    <th class="tableCustom">Cantidad </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transaccion of transacciones" [ngClass]="{
+                    'fila-roja': transaccion.codigoIbanRemitente == codigoIban,
+                    'fila-verde': transaccion.codigoIbanDestino == codigoIban
+                  }">
+                    <td>{{ transaccion.fechaTransaccion | date: "dd/MM/yyyy HH:mm:ss" }}</td>
+                    <td>{{ transaccion.codigoIbanRemitente }}</td>
+                    <td>{{ transaccion.codigoIbanDestino }}</td>
+                    <td>{{ transaccion.cantidad }} €</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

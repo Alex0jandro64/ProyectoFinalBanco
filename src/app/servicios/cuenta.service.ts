@@ -10,7 +10,9 @@ export class CuentaService {
 
   constructor(private auth: Auth, private baseDatosServicio: BaseDatosService) { }
 
-  
+  obtenerCuentaFirebase(iban: string){
+    return this.baseDatosServicio.obtenerPorFiltro("cuentas", "codigoIban", iban);
+  }
 
 
 }

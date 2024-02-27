@@ -10,12 +10,15 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class InicioComponent implements OnInit {
   emailUsuarioActual: string | undefined | null;
-  usuarioActual: Usuario | null = null; // Inicializado como null
+  usuarioActual: Usuario | null = null; // Inicializado como null 
 
   constructor(
     private usuarioServicio: UsuarioService,
     private baseDatosServicio: BaseDatosService
-  ) {}
+  ) {
+    localStorage.clear();
+    this.usuarioServicio.guardarUsuarioEnLocalStorage();
+  }
 
   ngOnInit(): void {
     this.emailUsuarioActual = this.usuarioServicio.obtenerUsuarioActual()?.email;

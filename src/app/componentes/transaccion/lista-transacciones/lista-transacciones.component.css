@@ -1,0 +1,27 @@
+.fila-roja {
+    background-color: red;
+    color: white;
+}
+
+.fila-verde {
+    background-color: green;
+    color: white;
+}
+
+.custom-table .fila-roja {
+    background-color: lightcoral; /* Color de fondo rojo */
+}
+
+.custom-table .fila-verde {
+    background-color: lightgreen; /* Color de fondo verde */
+}
+
+.custom-table.table-striped tbody tr.fila-roja td,
+.custom-table.table-striped tbody tr.fila-verde td {
+    background-color: transparent; /* Anular el color de fondo rayado */
+}
+
+.custom-table.table-bordered tbody tr.fila-roja td,
+.custom-table.table-bordered tbody tr.fila-verde td {
+    border-color: transparent; /* Anular el color de borde */
+}

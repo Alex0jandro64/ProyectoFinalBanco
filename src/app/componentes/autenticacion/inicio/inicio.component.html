@@ -3,6 +3,9 @@
       <div class="col-md-12">
         <h2>Cuenta</h2>
         <div class="user-info">
+          <p *ngIf="usuarioActual && usuarioActual.misCuentas && usuarioActual.misCuentas.length > 0">
+            Iban: {{ usuarioActual.misCuentas[0].codigoIban }} 
+          </p>
           <p>Nombre: {{ usuarioActual?.nombre}} {{ usuarioActual?.apellidos}}</p>
           <p *ngIf="usuarioActual && usuarioActual.misCuentas && usuarioActual.misCuentas.length > 0">
             Saldo: {{ usuarioActual.misCuentas[0].saldoCuenta }} €
@@ -25,7 +28,7 @@
           <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <h5 class="card-title">Realizar Transacción</h5>
             <p class="card-text">Haz una transacción a otra cuenta.</p>
-            <a href="#" class="btn btn-primary">Ir a Transacciones</a>
+            <a routerLink="/transaccion/nueva-transaccion" class="btn btn-primary">Ir a Transacciones</a>
           </div>
         </div>
       </div>
@@ -34,7 +37,7 @@
           <div class="card-body d-flex flex-column justify-content-center align-items-center">
             <h5 class="card-title">Historial de Transacciones</h5>
             <p class="card-text">Ver historial de transacciones realizadas.</p>
-            <a href="#" class="btn btn-primary">Ver Historial</a>
+            <a routerLink="/transaccion/lista-transacciones" class="btn btn-primary">Ver Historial</a>
           </div>
         </div>
       </div>
